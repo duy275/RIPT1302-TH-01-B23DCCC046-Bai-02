@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Quản lý Sinh viên</h1>
+        <form id="studentForm">
+            <input type="text" id="name" placeholder="Tên">
+            <input type="number" id="age" placeholder="Tuổi">
+            <input type="date" id="dob" placeholder="Ngày tháng năm sinh">
+            <input type="text" id="address" placeholder="Địa chỉ">
+            <input type="tel" id="phone" placeholder="Số điện thoại">
+            <input type="email" id="email" placeholder="Email">
+            <input type="text" id="class" placeholder="Lớp học">
+            <button type="button" onclick="addStudent()">Thêm</button>
+        </form>
+        <table id="studentTable">
+            <thead>
+                <tr>
+                    <th style="text-align: center;">STT</th>
+                    <th style="text-align: center;">Tên</th>
+                    <th style="text-align: center;">Tuổi</th>
+                    <th style="text-align: center;">Ngày sinh</th>
+                    <th style="text-align: center;">Địa chỉ</th>
+                    <th style="text-align: center;">Số điện thoại</th>
+                    <th style="text-align: center;">Email</th>
+                    <th style="text-align: center;">Lớp học</th>
+                    <th style="text-align: center;">Thao tác</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <script>
+        let students = [];
+
+function renderTable() {
+    const tableBody = document.querySelector('#studentTable tbody');
+    tableBody.innerHTML = '';
+
+    students.forEach((student, index) => {
+        const row = tableBody.insertRow();
+        row.innerHTML = `
+            <td>${index + 1}</td>
+            <td>${student.name}</td>
+            <td>${student.age}</td>
+            <td>${student.dob}</td>
+            <td>${student.address}</td>
+            <td>${student.phone}</td>
+            <td>${student.email}</td>
+            <td>${student.class}</td>
+            <td>
+                <button onclick="editStudent(${index})">Sửa</button>
+                <button onclick="deleteStudent(${index})">Xóa</button>
+            </td>
+        `;
+    });
+}
+
+function addStudent() {
+    const name = document.getElementById('name').value;
+    const age = document.getElementById('age').value;
+    const dob = document.getElementById('dob').value;
+    const address = document.getElementById('address').value;
+    const phone = document.getElementById('phone').value;
+    const email = document.getElementById('email').value;
+    const classInfo = document.getElementById('class').value;
+    if (!isNaN(age) && !isNaN(phone)) {
+        if (name && age && dob && address && phone && email && classInfo) {
+            const student = {
+                name: name,
+                age: age,
+                dob: dob,
+                address: address,
+                phone: phone,
+                email: email,
+                class: classInfo
+            };
+
+            students.push(student);
+            renderTable();
+            document.getElementById('studentForm').reset();
+        } else {
+            alert('Vui lòng điền đầy đủ thông tin sinh viên!');
+        }
+    } else {
+        alert('Tuổi và số điện thoại phải là số!');
+    }
+}
+
+function editStudent(index) {
+    const student = students[index];
+    document.getElementById('name').value = student.name;
+    document.getElementById('age').value = student.age;
+    document.getElementById('dob').value = student.dob;
+    document.getElementById('address').value = student.address;
+    document.getElementById('phone').value = student.phone;
+    document.getElementById('email').value = student.email;
+    document.getElementById('class').value = student.class;
+
+    students.splice(index, 1);
+    renderTable();
+}
+
+function deleteStudent(index) {
+    students.splice(index, 1);
+    renderTable();
+}
+    </script>
+</body>
+</html>

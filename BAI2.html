@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            background-image: url('https://www.color-meanings.com/wp-content/uploads/2022/12/black-feather-1.png');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        
+        .login-container {
+            background-color: #edede8;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            padding-left: 20px;
+            padding-right: 20px;
+            border-radius: 40px;    
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .login-input {
+            margin-bottom: 10px;
+        }
+        
+        .login-button {
+            background-color: #494947;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .login-title {
+            color:#494947;
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h1 class="login-title">Login</h1>
+        <span>Tài khoản:</span>
+        <input type="text" id="tk" class="login-input"><br>
+        <span>Mật khẩu:</span>
+        <input type="password" id="mk" class="login-input"><br>
+        <button class="login-button" onclick="login()">Đăng nhập</button> 
+    </div>
+
+    <script>
+        function login(){
+            var tkz = document.getElementById("tk").value;
+            var mkz = document.getElementById("mk").value;
+            if (tkz == "admin" && mkz == "admin"){
+                window.open("thongtin.html");
+            } else { 
+                alert('Tài khoản và mật khẩu không chính xác');
+            }
+        }
+    </script>
+</body>
+</html>
